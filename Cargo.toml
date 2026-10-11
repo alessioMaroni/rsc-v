@@ -16,7 +16,6 @@ license = "MIT OR Apache-2.0"
 repository = "https://github.com/alessioMaroni/RSC-V"
 
 [workspace.dependencies]
-RSC-V-kernel = { path = "./" }
 
 [package]
 name = "RSC-V-kernel"
