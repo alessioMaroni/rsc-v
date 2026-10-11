@@ -12,6 +12,10 @@ build: build-ada
 build-ada:
 	echo "Buildin Ada......."
 
+	chmod +x .bin/alr-fhs
+
+	mkdir -p ada/rts/adalib
+
 	mkdir -p ada/time/obj
 	.bin/alr-fhs -C ada/time exec -- riscv64-elf-gcc -c src/time.adb \
 		--RTS=$(PWD)/ada/rts \
