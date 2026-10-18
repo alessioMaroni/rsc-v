@@ -78,6 +78,7 @@ pub extern "C" fn trap_handler(
             // Machine Timer Interrupt
             0x7   => handle_timer_tick(),
             
+	    // External Machine Interrupt
             // 0xb  => ,
             // Unhandled interrupt
             _ => panic!(

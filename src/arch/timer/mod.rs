@@ -16,8 +16,8 @@ unsafe extern "C" {
 
 /// Physical memory-mapped address for the RISC-V `mtime` (Machine Time) register.
 /// This hardware counter increments monotonically at the system clock frequency.
-pub const MTIME_ADDR: usize    = 0x0200BFF8;
+pub const MTIME_ADDR: usize    = 0x40054000; // <- Indirizzo Timer RP2350
 
 /// Physical memory-mapped address for the RISC-V `mtimecmp` (Machine Time Compare) register.
 /// An exception/interrupt is signaled when `mtime` reaches or exceeds this value.
-pub const MTIMECMP_ADDR: usize = 0x02004000;
+pub const MTIMECMP_ADDR: usize = 0x40058000; // <- Indirizzo mtimecmp RP2350

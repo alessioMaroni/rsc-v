@@ -29,6 +29,7 @@ readme = "README.md"
 
 [dependencies]
 tests = { path = "tests", optional = true }
+rp2350-hazard3-hall = { path = "../rp2350-hazard3-hall" }
 
 [features]
 default = []
@@ -44,6 +45,8 @@ lto = false
 panic = "abort"
 
 [profile.release]
+# TODO: Remove
+debug = true
 opt-level = 3
 lto = "fat"
 codegen-units = 1

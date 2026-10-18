@@ -35,6 +35,10 @@ rustflags = [
     "-C", "link-arg=--nmagic",
 ]
 
+[env]
+CC = "clang"
+CFLAGS = "--target=riscv32-unknown-none-elf"
+
 [profile.dev]
 panic = "abort"
 overflow-checks = true

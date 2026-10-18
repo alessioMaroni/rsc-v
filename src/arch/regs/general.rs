@@ -46,6 +46,7 @@ impl TrapFrame {
         let _ = CONSOLE.write_fmt(format_args!("\x1b[1;33mREGISTER DUMP:\x1b[0m\n"));
         
         if let (Some(cause), Some(epc)) = (mcause, mepc) {
+
             let _ = CONSOLE.write_fmt(format_args!(
                 "\x1b[1;33mmcause:\x1b[0m {:#010x} | \x1b[1;33mmepc:\x1b[0m {:#010x}\n",
                 cause, epc

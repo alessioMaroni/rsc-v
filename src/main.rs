@@ -1,6 +1,8 @@
 #![no_std]
 #![no_main]
 
+pub use rp2350_hazard3_hall as rp2350;
+
 extern crate alloc;
 #[allow(unused_imports)]
 use alloc::vec::Vec;
@@ -19,20 +21,25 @@ pub mod io;
 pub mod mm;
 pub mod time;
 
-use crate::info::Info;
+use core::arch::global_asm;
+
 pub use crate::io::output::CONSOLE;
+
+/*
+use crate::info::Info;
 use crate::mm::ALLOCATOR;
 use crate::arch::mm::stack::{
     *,
     guard::setup_pmp_stack_guard,
 };
 use crate::time::init_timer;
-
-use core::arch::global_asm;
+use crate::drivers::serial::Serial;
+*/
 
 global_asm!(include_str!("arch/init/image_def.s"));
 global_asm!(include_str!("arch/init/set_stack.s"));
 
+/*
 global_asm!(concat!(
     include_str!("arch/regs/save_regs.s"),
     "\n",
@@ -40,9 +47,11 @@ global_asm!(concat!(
     "\n",
     include_str!("arch/trap/trap_entry.s")
 ));
+*/
 
 #[unsafe(no_mangle)]
 pub extern "C" fn _setup() -> ! {
+    /*
     unsafe {
         core::arch::asm!(
             "la t0, trap_entry",
@@ -64,14 +73,18 @@ pub extern "C" fn _setup() -> ! {
         ALLOCATOR.init(&info);
     }
 
+    Serial::init();
+
     init_timer();
+    */
 
     _main();
 }
 
 #[unsafe(no_mangle)]
 pub fn _main() -> ! {
-    CONSOLE.write_str("Hello, World!\n");
 
-    loop {}
+    loop {
+        unsafe { core::arch::asm!("nop"); }
+    }
 }

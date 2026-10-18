@@ -3,4 +3,5 @@
     "RUSTUP_TOOLCHAIN": "nightly"
   },
   "sarif-viewer.connectToGithubCodeScanning": "off",
+  "makefile.configureOnOpen": false,
 }

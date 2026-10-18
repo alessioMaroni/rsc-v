@@ -1,3 +1,8 @@
 /target
 /.venv
 /.build
+
+debugprobe.uf2
+debugprobe_v1.0.1.uf2
+flash_nuke.uf2
+RPI_PICO2-RISCV-20260824-v1.29.0.uf2

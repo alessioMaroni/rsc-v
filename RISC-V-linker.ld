@@ -1,6 +1,6 @@
 /* ========================================================================== */
-/* RISC-V Kernel Linker Script                                */
-/* Target: Bare-metal RV32IMAC (e.g., RP2350)                                  */
+/* RISC-V Kernel Linker Script                                                */
+/* Target: Bare-metal RV32IMAC (e.g., RP2350)                                 */
 /* ========================================================================== */
 
 /* Define the mandatory execution entry point of the kernel */
@@ -9,20 +9,28 @@ ENTRY(_start)
 /* Define the physical memory layout and access attributes */
 MEMORY
 {
-    FLASH   (rx)  : ORIGIN = 0x80000000, LENGTH = 2M     /* Non-volatile program memory (Read/Execute) */
-    RAM     (rwx) : ORIGIN = 0x80200000, LENGTH = 512K   /* Primary system data memory (Read/Write/Execute) */
-    SCRATCH (rwx) : ORIGIN = 0x80280000, LENGTH = 8K     /* Specialized scratchpad RAM */
-    UART    (rw)  : ORIGIN = 0x10000000, LENGTH = 4K     /* Memory-mapped I/O region for UART peripherals */
+    /* L'indirizzo della Flash XIP su RP2350 inizia a 0x10000000 */
+    FLASH   (rx)  : ORIGIN = 0x10000000, LENGTH = 2M     /* Non-volatile program memory (Read/Execute) */
+    
+    /* La SRAM principale del RP2350 inizia a 0x20000000 e ha una dimensione di 520K (512K utilizzabili in sicurezza) */
+    RAM     (rwx) : ORIGIN = 0x20000000, LENGTH = 512K   /* Primary system data memory (Read/Write/Execute) */
+    
+    /* Scratchpad posizionato in alto nella SRAM */
+    SCRATCH (rwx) : ORIGIN = 0x2007E000, LENGTH = 8K     /* Specialized scratchpad RAM */
+    
+    /* Indirizzo base UART0 per RP2350 (0x40034000) */
+    UART    (rw)  : ORIGIN = 0x40034000, LENGTH = 4K     /* Memory-mapped I/O region for UART peripherals */
 }
 
 /* Export symbolic references for machine timer control registers (CLINT subsystem) */
-PROVIDE(__MTIME_ADDR__    = 0x0200BFF8);
-PROVIDE(__MTIMECMP_ADDR__ = 0x02004000);
+/* Indirizzi timer RP2350 RISC-V */
+PROVIDE(__MTIME_ADDR__    = 0x40054000);
+PROVIDE(__MTIMECMP_ADDR__ = 0x40058000);
 
 SECTIONS
 {
     /* Set the initial location counter to the base of FLASH */
-    . = 0x80000000;
+    . = 0x10000000;
 
     /* Code and Read-Only Data Section */
     .text : {

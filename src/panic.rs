@@ -62,11 +62,11 @@ pub fn panic(info: &core::panic::PanicInfo) -> ! {
 #[unsafe(no_mangle)]
 pub extern "C" fn handle_stack_overflow_panic(corrupted_sp: usize, mcause: usize, mepc: usize) -> ! {
     // Output a high-priority, colored alert indicating that double-fault mitigation has engaged.
-    CONSOLE.write_str("\x1b[1;31m\n[FATAL!] Emergency Stack Overflow Handler reached (Double Fault mitigation)!\x1b[0m\n");
+    // CONSOLE.write_str("\x1b[1;31m\n[FATAL!] Emergency Stack Overflow Handler reached (Double Fault mitigation)!\x1b[0m\n");
     
     // Log the exact corrupted stack pointer value to aid in tracking down memory exhaustion or buffer overflows.
     CONSOLE.write_fmt(format_args!(
-        "\x1b[33mCorrupted SP was : {:#010x}\x1b[0m\n",
+         "\x1b[33mCorrupted SP was : {:#010x}\x1b[0m\n",
         corrupted_sp
     ));
 
