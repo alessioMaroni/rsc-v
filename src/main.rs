@@ -78,13 +78,20 @@ pub extern "C" fn _setup() -> ! {
     init_timer();
     */
 
-    _main();
+     	unsafe {rp2350::uart::uart_init()};
+	
+    	_main();
 }
 
 #[unsafe(no_mangle)]
 pub fn _main() -> ! {
-
     loop {
+	unsafe {
+            rp2350::uart::uart_write_byte(b'A');
+        }
+        for _ in 0..1_000_000 {
+            core::hint::spin_loop();
+        }
         unsafe { core::arch::asm!("nop"); }
     }
 }

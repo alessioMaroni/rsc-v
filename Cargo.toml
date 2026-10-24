@@ -52,5 +52,5 @@ lto = "fat"
 codegen-units = 1
 panic = "abort"
 overflow-checks = true
-debug = false
+# debug = false
 strip = "symbols"

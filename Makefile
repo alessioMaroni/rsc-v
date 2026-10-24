@@ -59,4 +59,4 @@ gdb:
 # Run `make serial` on another terminal
 # To exit from picocom: press Ctrl+A followed by Ctrl+X
 serial:
-	sudo picocom -b 115200 /dev/ttyACM0 --nolock
+	sudo picocom -b 9600 /dev/ttyACM0 --nolock
